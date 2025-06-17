@@ -12,8 +12,11 @@ setup(
     install_requires=[
         'pandas',
         'presidio-analyzer',
-        'presidio-anonymizer'
+        'presidio-anonymizer',
+        'openpyxl',
+        'pdfplumber'
     ],
+
     entry_points={
         'console_scripts': [
             'data-anonymizer = data_anonymizer.__main__:main'
