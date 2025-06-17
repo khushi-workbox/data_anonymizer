@@ -14,3 +14,4 @@
 git clone https://github.com/khushikumari1/data_anonymizer.git
 cd data_anonymizer
 pip install .
+python -m data_anonymizer --input examples/sample.csv --output examples/sample_anonymized.csv
