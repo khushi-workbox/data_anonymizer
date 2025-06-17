@@ -1,0 +1,3 @@
+pandas
+presidio-analyzer
+presidio-anonymizer
