@@ -140,6 +140,26 @@ def anonymize_file(input_path: str, output_path: str = None) -> pd.DataFrame:
         df = pd.read_csv(input_path)
     elif ext in ['xls', 'xlsx']:
         df = pd.read_excel(input_path)
+    
+    elif ext == 'pdf':
+        import pdfplumber
+        with pdfplumber.open(input_path) as pdf:
+            all_text = "\n".join(page.extract_text() or '' for page in pdf.pages)
+        
+        print("📝 Extracted Text Preview:")
+        print(all_text[:500])  # show first 500 chars
+
+        print("🔍 Running anonymization...")
+        anonymized_text = _anonymize_text(all_text)
+
+        if output_path:
+            with open(output_path.replace('.pdf', '_anonymized.txt'), 'w', encoding='utf-8') as f:
+                f.write(anonymized_text)
+            print(f"💾 Anonymized text saved to: {output_path.replace('.pdf', '_anonymized.txt')}")
+        
+        return anonymized_text
+
+
     else:
         raise ValueError("❌ Unsupported file format. Only CSV and Excel are supported.")
 
